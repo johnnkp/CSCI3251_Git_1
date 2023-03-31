@@ -1,4 +1,4 @@
-from lab7 import check_type
+from lab7 import check_type, check_name, check_name_len, check_sid_len
 
 
 def test_check_type():
@@ -24,3 +24,23 @@ def test_check_type():
 
     myID4 = "a_john"
     assert check_type(myname, myID4) == False
+
+    assert check_name("abc") == True
+    assert check_name("\xaa\xaa") == True
+    assert check_name("\xaa \xaa") == True
+    assert check_name("\xaa \xfa ") == False
+
+    assert check_name_len("abc") == True
+    assert check_name_len("abc abc") == True
+    assert check_name_len("\xaa\xaa") == True
+    assert check_name_len("\xaa \xaa") == True
+    assert check_name_len("abc abc abc abc abc a") == False
+    assert check_name_len("\xaa\xaa\xaa\xaa\xaa\xaa\xaa\xaa\xaa\xaa") == True
+    assert check_name_len("\xaa\xaa\xaa\xaa\xaa \xaa\xaa\xaa\xaa\xaa") == False
+
+    assert check_sid_len("1155") == False
+    assert check_sid_len("1155111111") == True
+    assert check_sid_len("115511111 ") == False
+    assert check_sid_len(115511111) == False
+    assert check_sid_len(1155111111) == True
+    assert check_sid_len("1155 11111") == False
