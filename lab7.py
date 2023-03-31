@@ -15,6 +15,22 @@ def check_type(my_name=None, my_id=None):
             #         return False
         return True
 
+def check_name(name):
+    if (not name.isprintable()) or (name[-1] == "\x20"):
+        return False
+    return True
+
+
+def check_name_len(name):
+    if len(name.encode('utf-8')) > 20:
+        return False
+    return True
+
+
+def check_sid_len(id):
+    if not (str(id).isdigit() and len(str(id)) == 10):
+        return False
+    return True
 
 # imagine these data is from db
 myName = "Ng Kai Pong"
